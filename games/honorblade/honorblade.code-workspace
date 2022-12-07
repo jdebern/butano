@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{	// Common includes
+			"path": "../../common"
+		},
+		{	// Butano Engine Dir
+			"path": "../../butano"
+		},
+		{	// Text examples
+			"path": "../../examples/text"
+		},
+		{	// Sprite examples
+			"path": "../../examples/sprites"
+		}
+	],
+	"settings": {}
+}
