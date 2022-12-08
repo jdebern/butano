@@ -1,0 +1,12 @@
+VSCode recommended extensions:
+
+C/C++
+Material Icon Theme
+Makefile Tools - Maybe
+
+VSCode configurations:
+"name": "gba",
+"includePath": [
+    "${workspaceFolder}/**",
+    "${workspaceFolder}/../../butano/include"
+],
