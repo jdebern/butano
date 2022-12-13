@@ -10,7 +10,7 @@
 			"path": "../../butano"
 		},
 		{	// Text examples
-			"path": "../../examples/text"
+			"path": "../../examples/dynamic_regular_bg"
 		},
 		{	// Sprite examples
 			"path": "../../examples/sprites"
