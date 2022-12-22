@@ -105,6 +105,7 @@ namespace
     public:
         int cpu_usage_ticks = 0;
         int vblank_usage_ticks = 0;
+        int missed_frames = 0;
     };
 
     class static_data
@@ -118,6 +119,7 @@ namespace
         string_view assert_tag = BN_VERSION_STRING;
         int skip_frames = 0;
         int last_update_frames = 1;
+        int missed_frames = 0;
         bool slow_game_pak = false;
         volatile bool waiting_for_vblank = false;
     };
@@ -215,9 +217,8 @@ namespace
 
         hw::core::wait_for_vblank();
 
-        data.cpu_usage_timer.restart();
-
-        BN_PROFILER_ENGINE_GENERAL_START("eng_commit");
+        result.missed_frames = data.missed_frames;
+        data.missed_frames = 0;
 
         BN_PROFILER_ENGINE_DETAILED_START("eng_audio_commands");
         audio_manager::execute_commands();
@@ -363,15 +364,17 @@ void update()
     else
     {
         ticks total_ticks;
+        int frame_index = 0;
 
-        for(int frame_index = 0; frame_index < update_frames; ++frame_index)
+        while(frame_index < update_frames)
         {
             ticks frame_ticks = update_impl();
-            frame_index += frame_ticks.cpu_usage_ticks / timers::ticks_per_frame();
             total_ticks.cpu_usage_ticks += frame_ticks.cpu_usage_ticks;
             total_ticks.vblank_usage_ticks += frame_ticks.vblank_usage_ticks;
+            frame_index += frame_ticks.missed_frames + 1;
         }
 
+        total_ticks.missed_frames = frame_index - update_frames;
         data.last_ticks = total_ticks;
     }
 
@@ -384,6 +387,10 @@ void on_vblank()
 {
     if(data.waiting_for_vblank)
     {
+        data.cpu_usage_timer.restart();
+
+        BN_PROFILER_ENGINE_GENERAL_START("eng_commit");
+
         BN_PROFILER_ENGINE_DETAILED_START("eng_audio_update");
         audio_manager::update();
         BN_PROFILER_ENGINE_DETAILED_STOP();
@@ -393,6 +400,8 @@ void on_vblank()
     else
     {
         hdma_manager::commit(false);
+
+        ++data.missed_frames;
     }
 }
 
@@ -463,6 +472,11 @@ fixed last_cpu_usage()
 fixed last_vblank_usage()
 {
     return fixed(data.last_ticks.vblank_usage_ticks) / (timers::ticks_per_vblank() * data.last_update_frames);
+}
+
+int last_missed_frames()
+{
+    return data.last_ticks.missed_frames;
 }
 
 vblank_callback_type vblank_callback()

@@ -2020,6 +2020,17 @@
  * @tableofcontents
  *
  *
+ * @section changelog_13_2_0 13.2.0 (next release)
+ *
+ * * bn::sram::read_span, bn::sram::read_span_offset, bn::sram::write_span and bn::sram::write_span_offset added.
+ * * bn::core::last_missed_frames added.
+ * * bn::core::set_skip_frames accuracy improved.
+ * * Wait for V-Blank improved.
+ * * Disabled asserts indicate the compiler that if the condition is false the code is unreachable.
+ * * bn::blending_transparency_attributes missing header inclusions fixed.
+ * * SRAM is cleared when formatting in the `sram` example.
+ *
+ *
  * @section changelog_13_1_1 13.1.1
  *
  * Recovery of deleted background maps fixed.
