@@ -25,10 +25,10 @@ namespace blade
 		static constexpr int map_cell_count = map_rows * map_columns;
 
 		alignas(int) bn::regular_bg_map_cell map_cells[map_cell_count];
-		const bn::regular_bg_map_item		map_item;
-		const bn::regular_bg_item			map_background_item;
-		const bn::regular_bg_ptr			background_ptr;
-		const bn::regular_bg_map_ptr		background_map_ptr;
+		bn::regular_bg_map_item		map_item;
+		bn::regular_bg_item			map_background_item;
+		bn::regular_bg_ptr			background_ptr;
+		bn::regular_bg_map_ptr		background_map_ptr;
 	};
 }
 
