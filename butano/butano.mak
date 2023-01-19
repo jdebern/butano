@@ -42,6 +42,14 @@ include $(DEVKITARM)/gba_rules
 	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.bn_noflto.d $(CFLAGS) -fno-lto -c $< -o $@ $(ERROR_FILTER)
 
 #---------------------------------------------------------------------------------------------------------------------
+# Butano custom link rule for avoiding issues when linking too much object files:
+#---------------------------------------------------------------------------------------------------------------------
+%.elf:
+	$(SILENTMSG) linking rom...
+	@echo $(OFILES) > bn_ofiles.txt
+	$(SILENTCMD)$(LD) $(LFLAGS) -specs=gba.specs @bn_ofiles.txt $(LIBPATHS) $(LIBS) -o $@
+
+#---------------------------------------------------------------------------------------------------------------------
 # Options for code generation:
 #---------------------------------------------------------------------------------------------------------------------
 ARCH        :=	-mthumb -mthumb-interwork

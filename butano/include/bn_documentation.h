@@ -2020,7 +2020,14 @@
  * @tableofcontents
  *
  *
- * @section changelog_13_2_0 13.2.0 (next release)
+ * @section changelog_13_3_0 13.3.0 (next release)
+ *
+ * * @ref BN_CONST added.
+ * * bn::sqrt, bn::atan2 and bn::degrees_atan2 marked as @ref BN_CONST.
+ * * Linking with too much object files fixed.
+ *
+ *
+ * @section changelog_13_2_0 13.2.0
  *
  * * bn::sram::read_span, bn::sram::read_span_offset, bn::sram::write_span and bn::sram::write_span_offset added.
  * * bn::core::last_missed_frames added.
