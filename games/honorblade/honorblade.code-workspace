@@ -13,7 +13,7 @@
 			"path": "../../games/butano-fighter"
 		},
 		{	// Sprite examples
-			"path": "../../examples/cameras"
+			"path": "../../examples/dynamic_affine_bg"
 		}
 	],
 	"settings": {
@@ -22,7 +22,9 @@
 			"tuple": "cpp",
 			"type_traits": "cpp",
 			"utility": "cpp",
-			"xutility": "cpp"
+			"xutility": "cpp",
+			"atomic": "cpp",
+			"algorithm": "cpp"
 		}
 	}
 }

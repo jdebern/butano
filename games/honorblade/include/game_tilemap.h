@@ -4,7 +4,7 @@
 #include "bn_core.h"
 #include "bn_camera_ptr.h"
 #include "bn_optional.h"
-#include "game_mapblock.h"
+#include "bn_affine_bg_ptr.h"
 
 namespace blade
 {
@@ -19,9 +19,8 @@ namespace blade
 			[[nodiscard]] bn::camera_ptr& get_camera() { return *opt_map_camera.get(); }
 
         protected:
+			bn::optional<bn::affine_bg_ptr> opt_map_ptr;
             bn::optional<bn::camera_ptr>	opt_map_camera;
-			bn::optional<mapblock>			opt_map_block;
-			bn::optional<mapblock>			opt_map_block_2;
     };
 }
 
