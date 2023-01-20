@@ -1,4 +1,5 @@
 #include "game_scene_world.h"
+#include "game_data_enums.h"
 #include "bn_log.h"
 #include "bn_string.h"
 #include "bn_fixed_point.h"
@@ -31,7 +32,7 @@ namespace blade
 
 		text_sprites.clear();
 		
-		const bn::camera_ptr& camera = map.get_camera();
+		bn::camera_ptr camera = map.get_camera();
 		bn::string<64> string;
 		bn::ostringstream string_stream(string);
 		string_stream << "Camera x:";
@@ -39,7 +40,8 @@ namespace blade
 		string_stream << " y:";
 		string_stream << camera.position().y();
 		text_generator.generate(-100, -60, string, text_sprites);
-		text_generator.set_z_order(5);
+		text_generator.set_bg_priority((int)bg_priority::TOP);
+		text_generator.set_z_order(0);
 
 		return scene_type::WORLD;
 	}

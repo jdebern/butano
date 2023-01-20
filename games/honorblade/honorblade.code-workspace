@@ -10,7 +10,7 @@
 			"path": "../../butano"
 		},
 		{	// Text examples
-			"path": "../../games/butano-fighter"
+			"path": "../../examples/sprites"
 		},
 		{	// Sprite examples
 			"path": "../../examples/dynamic_affine_bg"
