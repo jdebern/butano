@@ -8,6 +8,7 @@
 #include "game_data_worldmap_affine.h"
 
 #include "bn_affine_bg_items_landmass_warm.h"
+#include "bn_regular_bg_items_water_tiles.h"
 
 #define MAP_LOG_STATUS 0
 
@@ -28,8 +29,20 @@ namespace blade
 		opt_map_ptr = bn::affine_bg_items::landmass_warm.create_bg(0,0);
 		opt_map_ptr->set_wrapping_enabled(false);
 		opt_map_ptr->set_camera(opt_map_camera);
+		//opt_map_ptr->set_priority(1);
+		opt_map_ptr->set_z_order(1);
 		opt_map_camera->set_position(-200, -385);
 		
+		bn::memory::set_bytes(0x2, water_cell_count, water_cells);
+		opt_water_map_item = bn::regular_bg_map_item(water_cells[0], bn::size(water_rows, water_columns));
+		opt_water_bg_item = bn::regular_bg_item(
+			bn::regular_bg_items::water_tiles.tiles_item(),
+			bn::regular_bg_items::water_tiles.palette_item(),
+			*opt_water_map_item);
+		opt_water_bg_ptr = opt_water_bg_item->create_bg(0,0);
+		//opt_water_bg_ptr->set_priority(0);
+		opt_water_bg_ptr->set_z_order(0);
+		opt_water_bg_ptr->set_camera(opt_map_camera);
 	}
 
     void tilemap::update()

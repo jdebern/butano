@@ -2,7 +2,8 @@
 #include "bn_log.h"
 #include "bn_string.h"
 #include "bn_fixed_point.h"
-
+#include "bn_bg_palettes.h"
+#include "bn_color.h"
 #include "common_variable_8x8_sprite_font.h"
 
 #define WORLD_LOG_STATUS 0
@@ -12,7 +13,7 @@ namespace blade
 	world::world()
 		: text_generator(common::variable_8x8_sprite_font)
 	{
-
+		bn::bg_palettes::set_transparent_color(bn::color(1,0,1));
 #if WORLD_LOG_STATUS
 		BN_LOG("Used_Alloc_EWRAM - ", bn::memory::used_alloc_ewram());
 		BN_LOG("Available_alloc_EWRAM - ", bn::memory::available_alloc_ewram());
@@ -38,6 +39,7 @@ namespace blade
 		string_stream << " y:";
 		string_stream << camera.position().y();
 		text_generator.generate(-100, -60, string, text_sprites);
+		text_generator.set_z_order(5);
 
 		return scene_type::WORLD;
 	}
