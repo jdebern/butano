@@ -1,5 +1,5 @@
-#ifndef _GAME_TILEMAP
-#define _GAME_TILEMAP
+#ifndef GAME_WORLDMAP
+#define GAME_WORLDMAP
 
 #include "bn_core.h"
 #include "bn_camera_ptr.h"
@@ -14,15 +14,13 @@
 #include "bn_regular_bg_item.h"
 #include "bn_regular_bg_ptr.h"
 
-#include "bn_sprite_ptr.h"
-
 namespace blade
 {
-    class tilemap
+    class worldmap
     {
 
         public:
-            tilemap();
+            worldmap();
 
             void update();
 			
@@ -31,6 +29,7 @@ namespace blade
         protected:
 			void create_terrain();
 			void create_water();
+            //void create_hero();
 
             static constexpr int water_rows = 32;
             static constexpr int water_columns = 32;
