@@ -16,13 +16,14 @@ namespace blade
 	public:
 		world();
 
-		void create_hero();
+		void create_units();
 
 		[[nodiscard]] bn::optional<scene_type> update() final;
 
 	protected:
 		worldmap map;
 		unit hero_unit;
+		unit axe_unit;
 		
 		bn::sprite_text_generator		text_generator;
 		bn::vector<bn::sprite_ptr, 32>	text_sprites;

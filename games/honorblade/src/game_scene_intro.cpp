@@ -10,7 +10,7 @@ namespace blade
     {
         text_generator.set_center_alignment();
         
-		text_generator.generate(0, -14, "Testing grid maps", text_sprites);
+		text_generator.generate(0, -14, "H o n o r - B l a d e", text_sprites);
 		text_generator.generate(0, 24, "[Press Start]", text_sprites);
     }
 

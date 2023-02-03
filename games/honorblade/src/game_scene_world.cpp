@@ -5,13 +5,15 @@
 #include "bn_color.h"
 #include "bn_span.h"
 #include "bn_common.h"
+#include "bn_keypad.h"
 
 #include "game_scene_world.h"
 #include "game_data_enums.h"
 #include "game_unit_assets.h"
 
 #include "common_variable_8x8_sprite_font.h"
-#include "bn_sprite_items_hero_sprites.h"
+#include "bn_sprite_items_hero_worldmap_unit.h"
+#include "bn_sprite_items_axe_unit.h"
 
 #define WORLD_LOG_STATUS 0
 
@@ -22,7 +24,7 @@ namespace blade
 	{
 		
 		bn::bg_palettes::set_transparent_color(bn::color(1,0,1));
-		create_hero();
+		create_units();
 
 #if WORLD_LOG_STATUS
 		BN_LOG("Used_Alloc_EWRAM - ", bn::memory::used_alloc_ewram());
@@ -35,14 +37,22 @@ namespace blade
 #endif // WORLD_LOG_STATUS
 	}
 
-	void world::create_hero()
+	void world::create_units()
 	{
-		hero_unit.init(bn::sprite_items::hero_sprites);
-		//hero_unit.create_anim(5, bn::span<int>({1,2,3}));
-		hero_unit.load_anim(
-			&unit_assets::hero_load_anim
-		);
-		hero_unit.set_camera(map.get_camera());
+		hero_unit.init(bn::sprite_items::hero_worldmap_unit);
+		axe_unit.init(bn::sprite_items::axe_unit);
+
+		hero_unit.set_load_list(unit_assets::hero_anims);
+		hero_unit.load_anim(anim_indices::idle);
+
+		axe_unit.set_load_list(unit_assets::axe_anims);
+		axe_unit.load_anim(anim_indices::idle);
+
+		bn::camera_ptr camera = map.get_camera();
+		hero_unit.set_camera(camera);
+		axe_unit.set_camera(camera);
+
+		axe_unit.set_position(180, -215);
 	}
 
 	bn::optional<scene_type> world::update()
@@ -52,11 +62,22 @@ namespace blade
 
 		map.update();
 		hero_unit.update();
+		axe_unit.update();
 
 		bn::fixed_point new_cam_pos = camera.position();
 		hero_unit.set_position(new_cam_pos);
 
 		bn::sprite_ptr hero_sprite = hero_unit.get_sprite();
+
+		if (old_cam_pos != new_cam_pos)
+		{
+			hero_unit.load_anim(anim_indices::move);
+		}d
+		else
+		{
+			hero_unit.load_anim(anim_indices::idle);
+		}
+
 		if (old_cam_pos.x() < new_cam_pos.x())
 		{
 			hero_sprite.set_horizontal_flip(false);
@@ -64,6 +85,13 @@ namespace blade
 		else if (old_cam_pos.x() > new_cam_pos.x())
 		{
 			hero_sprite.set_horizontal_flip(true);
+		}
+
+		if (bn::keypad::b_pressed())
+		{
+			static int index = 0;
+			index = (index + 1) % 3;
+			axe_unit.load_anim(index);
 		}
 
 		text_sprites.clear();

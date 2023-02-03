@@ -21,13 +21,13 @@ namespace blade
 
     void unit::update()
     {
-        if (opt_anim_action)
+        if (opt_anim_action && !opt_anim_action->done())
         {
             opt_anim_action->update();
         }
     }
     
-    void unit::set_position(bn::fixed& x, bn::fixed& y)
+    void unit::set_position(bn::fixed x, bn::fixed y)
     {
         if (opt_sprite_ptr)
         {
@@ -43,19 +43,20 @@ namespace blade
         }
     }
 
-    // void unit::create_anim(int wait_updates, const bn::span<const uint16_t>& indices)
-    // {
-    //     BN_ASSERT(indices.size() >= 1 && indices.size() <= 5, "Invalid indices size");
-
-    //     opt_anim_action = bn::sprite_animate_action<5>(
-    //         *opt_sprite_ptr, wait_updates, opt_sprite_item->tiles_item(), true, indices);
-    // }
-
-    void unit::load_anim(load_unit_asset_t asset_func)
+    void unit::load_anim(int index)
     {
-        opt_anim_action = asset_func(this);
+        if (anim_index == index) return;
+        
+        anim_index = index;
+        opt_anim_action = anim_load_assets[index](this);
     }
 
+    void unit::set_load_list(const load_unit_asset_t load_list[])
+    {
+        BN_ASSERT(load_list, "Must provide an asset load list");
+
+        anim_load_assets = load_list;
+    }
     void unit::set_camera(bn::camera_ptr camera)
     {
         if (opt_sprite_ptr)
