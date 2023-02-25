@@ -26,4 +26,4 @@ namespace blade
 
 }
 
-#endif
+#endif // GAME_SCENE_H

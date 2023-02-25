@@ -1,5 +1,5 @@
-#ifndef GAME_SCENE_WORLD
-#define GAME_SCENE_WORLD
+#ifndef GAME_SCENE_WORLD_H
+#define GAME_SCENE_WORLD_H
 
 #include "game_scene.h"
 #include "game_worldmap.h"
@@ -30,4 +30,4 @@ namespace blade
 	};
 }
 
-#endif
+#endif // GAME_SCENE_WORLD_H

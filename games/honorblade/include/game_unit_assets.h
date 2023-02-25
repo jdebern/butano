@@ -1,5 +1,5 @@
-#ifndef GAME_UNITASSETS_H
-#define GAME_UNITASSETS_H
+#ifndef GAME_UNIT_ASSETS_H
+#define GAME_UNIT_ASSETS_H
 
 #include "bn_sprite_ptr.h"
 #include "bn_sprite_item.h"
@@ -32,4 +32,4 @@ namespace blade
     }
 }
 
-#endif
+#endif // GAME_UNIT_ASSETS_H

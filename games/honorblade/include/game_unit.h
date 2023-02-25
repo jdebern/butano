@@ -50,4 +50,4 @@ namespace blade
     };
 }
 
-#endif
+#endif // GAME_UNIT_H

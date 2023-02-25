@@ -1,5 +1,5 @@
-#ifndef GAME_SCENE_INTRO
-#define GAME_SCENE_INTRO
+#ifndef GAME_SCENE_INTRO_H
+#define GAME_SCENE_INTRO_H
 
 #include "game_scene.h"
 
@@ -21,4 +21,4 @@ namespace blade
 	};
 }
 
-#endif
+#endif // GAME_SCENE_INTRO_H

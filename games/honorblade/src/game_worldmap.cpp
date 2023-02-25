@@ -26,8 +26,7 @@ namespace blade
 		: opt_map_camera(bn::camera_ptr::create(0,0))
 	{
 		create_terrain();
-		create_water();
-		//create_hero();
+		//create_water();
 
 		// lookin at the castle
 		//opt_map_camera->set_position(-200, -385);
@@ -63,47 +62,33 @@ namespace blade
 		opt_water_bg_ptr->set_z_order(0);
 	}
 
-	// void worldmap::create_hero()
-	// {
-	// 	opt_hero_sprite_ptr = bn::sprite_items::hero_sprites.create_sprite(0, 0);
-    //     opt_hero_sprite_ptr->set_tiles(bn::sprite_items::hero_sprites.tiles_item().create_tiles(0));
-	// 	if (opt_hero_sprite_ptr)
-	// 	{
-	// 		hero_anim_action = bn::create_sprite_animate_action_forever(
-    //                 *opt_hero_sprite_ptr, 5, bn::sprite_items::hero_sprites.tiles_item(), 1, 2, 3);
-	// 	}
-
-	// 	opt_hero_sprite_ptr->set_camera(opt_map_camera);
-	// 	opt_hero_sprite_ptr->set_bg_priority((int)bg_priority::TERRAIN);
-	// }
-
     void worldmap::update()
     {
-		static uint8_t update_frames = 0;
-		static uint8_t update_count = 0;
+		// static uint8_t update_frames = 0;
+		// static uint8_t update_count = 0;
 
-		update_frames++;
-		if (update_frames > 5)
-		{
-			for (int x = 0; x < water_cell_count; x++)
-			{
-				if (x % 3 == 0)
-				{
-					water_cells[x] = bn::max(2, (water_cells[x] + 1) % 8);
-				}
-			}
+		// update_frames++;
+		// if (update_frames > 5)
+		// {
+		// 	for (int x = 0; x < water_cell_count; x++)
+		// 	{
+		// 		if (x % 3 == 0)
+		// 		{
+		// 			water_cells[x] = bn::max(2, (water_cells[x] + 1) % 8);
+		// 		}
+		// 	}
 
-			if (update_count % 2 == 0)
-			{
-				opt_water_bg_ptr->set_x(opt_water_bg_ptr->x() - 1);
-			}
+		// 	if (update_count % 2 == 0)
+		// 	{
+		// 		opt_water_bg_ptr->set_x(opt_water_bg_ptr->x() - 1);
+		// 	}
 
-			bn::regular_bg_map_ptr map_ptr = opt_water_bg_ptr->map();
-			map_ptr.reload_cells_ref();
+		// 	bn::regular_bg_map_ptr map_ptr = opt_water_bg_ptr->map();
+		// 	map_ptr.reload_cells_ref();
 
-			update_frames = 0;
-			update_count++;
-		}
+		// 	update_frames = 0;
+		// 	update_count++;
+		// }
 
         bn::camera_ptr camera = get_camera();
 		bn::fixed_point cam_position = camera.position();

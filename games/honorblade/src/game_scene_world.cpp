@@ -9,6 +9,7 @@
 
 #include "game_scene_world.h"
 #include "game_data_enums.h"
+#include "game_data_poi.h"
 #include "game_unit_assets.h"
 
 #include "common_variable_8x8_sprite_font.h"
@@ -22,9 +23,13 @@ namespace blade
 	world::world()
 		: text_generator(common::variable_8x8_sprite_font)
 	{
-		
 		bn::bg_palettes::set_transparent_color(bn::color(1,0,1));
 		create_units();
+		
+		bn::camera_ptr camera = map.get_camera();
+		blade::load_poi_asset();
+		blade::opt_poi_ptr->set_position(208, -218);
+		blade::opt_poi_ptr->set_camera(camera);
 
 #if WORLD_LOG_STATUS
 		BN_LOG("Used_Alloc_EWRAM - ", bn::memory::used_alloc_ewram());
@@ -63,6 +68,7 @@ namespace blade
 		map.update();
 		hero_unit.update();
 		axe_unit.update();
+		blade::opt_poi_action->update();
 
 		bn::fixed_point new_cam_pos = camera.position();
 		hero_unit.set_position(new_cam_pos);
@@ -72,7 +78,7 @@ namespace blade
 		if (old_cam_pos != new_cam_pos)
 		{
 			hero_unit.load_anim(anim_indices::move);
-		}d
+		}
 		else
 		{
 			hero_unit.load_anim(anim_indices::idle);

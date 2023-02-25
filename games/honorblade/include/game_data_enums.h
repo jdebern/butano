@@ -1,5 +1,5 @@
-#ifndef GAMEDATA_ENUMS_H
-#define GAMEDATA_ENUMS_H
+#ifndef GAME_DATA_ENUMS_H
+#define GAME_DATA_ENUMS_H
 
 namespace blade
 {
@@ -12,4 +12,4 @@ namespace blade
 	};
 }
 
-#endif
+#endif // GAME_DATA_ENUMS_H

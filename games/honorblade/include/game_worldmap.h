@@ -1,5 +1,5 @@
-#ifndef GAME_WORLDMAP
-#define GAME_WORLDMAP
+#ifndef GAME_WORLDMAP_H
+#define GAME_WORLDMAP_H
 
 #include "bn_core.h"
 #include "bn_camera_ptr.h"
@@ -29,7 +29,6 @@ namespace blade
         protected:
 			void create_terrain();
 			void create_water();
-            //void create_hero();
 
             static constexpr int water_rows = 32;
             static constexpr int water_columns = 32;
@@ -47,4 +46,4 @@ namespace blade
     };
 }
 
-#endif
+#endif // GAME_WORLDMAP_H
